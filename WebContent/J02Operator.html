@@ -30,7 +30,9 @@
         document.write("<br/> 3>9==0의 결과:" + (3 > 9 == 0));
         /*
         3>9 => false
-        0 => false 그러므로 위의 결과는 true
+        0 => false 
+        false == false
+        그러므로 위의 결과는 true
         */
 
         //-1은 0이 아니므로 true
@@ -57,7 +59,7 @@
             document.write("<br/>10-10은 false이다");
         }
 
-        //flase와 null 자체에 대한 비교이므로 false가 반환됨
+        //false와 null 자체에 대한 비교이므로 false가 반환됨
         if (false == null) {
             document.write("<br/>true이다");
         }
