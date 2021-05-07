@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J17CssControl.html</title>
+    <script>
+        // 전역변수 : 기사부분의 폰트 사이즈를 저장
+        var pTag, pSize;
+
+        window.onload = function () {
+            /*
+            p태그내에 작성된 기사의 폰트크기를 얻어와서 변수에 저장
+            */
+            pTag = document.getElementById("article");
+            pSize = parseInt(pTag.style.fontSize); //최초실행시 12가 저장됨
+        }
+
+        /*
+        JS에서 CSS 속성 컨트롤
+            : DOM객체.style.CSS속성 = '속성값';
+            단, 이때 CSS 속성에 하이픈이 들어간다면 제거 후 첫글자를
+            대문자로 변경한다. 또한 크기를 부여할때는 반드시 px와 같은
+            단위로 기술해야 한다.
+        */
+        function fnArticle(flag) {
+
+            switch (flag) {
+                case "+":
+                    pSize += 10;
+                    pTag.style.fontSize = pSize + "px";
+                    break;
+                case "-":
+                    pSize -= 10;
+                    pTag.style.fontSize = pSize + "px";
+                    break;
+                case "R":
+                    pTag.style.color = "red";
+                    break;
+                case "G":
+                    pTag.style.color = "green";
+                    break;
+                case "B":
+                    pTag.style.color = "blue";
+                    break;
+                case "Bo":
+                    pTag.style.fontWeight = "bold";
+                    break;
+                case "No":
+                    pTag.style.fontWeight = "normal";
+                    break;
+                case "Ce":
+                    pTag.style.textAlign = "center";
+                    break;
+                case "Le":
+                    pTag.style.textAlign = "left";
+                    break;
+                default:
+                    pTag.style.color = "black";
+            }
+        }
+        /*
+        문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+        폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
+        글꼴 : Verdana, 굴림체, 휴먼옛체, 궁서, Impact
+        */
+        var fontToggle = 0; //폰트 토글을 위한 전역변수
+        function setFont() {
+            // 문제에서 제시된 폰트를 배열로 선언(리터럴 표기법)
+            var fontArray = ['Verdana', '굴림체', '휴먼옛체', '궁서', 'Impact'];
+            // 정수를 5로 나누면 나머지는 0~4까지 생성된다.
+            var fontIndex = fontToggle % 5;
+            // 위에서 구한 수를 인덱스로 사용하여 폰트를 설정
+            pTag.style.fontFamily = fontArray[fontIndex];
+            // 함수를 호출할때마다 전역변수 증가
+            fontToggle++;
+        }
+    </script>
+
+</head>
+
+<body>
+    <h2>자바스크립트로 CSS제어하기</h2>
+    <input type="button" value="글꼴바꾸기" onclick="setFont();" />
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+');">+</button>
+        <button onclick="fnArticle('-');">-</button>
+        <button onclick="fnArticle('R');">Red</button>
+        <button onclick="fnArticle('G');">Green</button>
+        <button onclick="fnArticle('B');">Blue</button>
+        <button onclick="fnArticle('');">Black</button>
+        <button onclick="fnArticle('Bo');">볼드체</button>
+        <button onclick="fnArticle('No');">보통체</button>
+        <button onclick="fnArticle('Ce');">가운데정렬</button>
+        <button onclick="fnArticle('Le');">좌측정렬</button>
+    </fieldset>
+    <p style="font-size: 12px;" id="article">
+        오늘의 뉴스<br />
+        [인터풋볼] 윤효용 기자 =챔피언스리그 결승 진출에 실패한 네이마르(29, 파리 생제르맹)가 이틀 만에 심경을 토로했다.
+
+        PSG는 지난 5일(이하 한국시간) 영국 맨체스터 이티하드 스타디움에서 열린 2020-21시즌 유럽축구연맹(UEFA) 챔피언스리그(UCL) 준결승 2차전에서 0-2로 패했다. 1차전에서 1-2로 패했던
+        PSG는
+        2차전 합산 1-4로 패하며 또 한 번 UCL 우승 도전을 마감했다.
+
+        PSG는 1차전 결과를 뒤집기 위해 2차전 전반 초반부터 공격적인 운영으로 맨시티를 몰아붙였다. 에이스인 네이마르를 비롯해 마우로 이카르디, 앙헬 디마리아가 총 출동해 득점 사냥에 나섰다. 특히
+        네이마르는 경기
+        전부터 "승리하기 위해서 경기장에서 죽을 수도 있다"고 말하며 비장한 모습을 보였다.
+
+        그러나 정반대의 결과가 펼쳐졌다. 무리하게 공격을 시도하던 PSG는 공수 밸런스가 무너졌고, 이것이 독이 됐다. 맨시티는 역습 한 방으로 찬스를 만들었고, 전반 11분 마레즈가 선제골을 터뜨리며
+        PSG를 더욱
+        조급하게 만들었다. 이어 후반 18분 또 한 번 카운터 어택을 성공시키며 점수 차가 더욱 벌어졌다. 급해진 PSG는 감정을 컨트롤하지 못했고 후반 24분 디마리아가 퇴장당하며 수적 열세까지 놓였다.
+        결국 한 골도
+        넣지 못한 채 대회 탈락을 받아들여야 했다.
+    </p>
+</body>
+
+</html>
